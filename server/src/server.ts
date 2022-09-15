@@ -2,6 +2,14 @@ import express, { response } from 'express';
 
 const app = express();
 
+app.get('/games', (request, response) => {
+  return response.json([]);
+});
+
+app.post('/ads', (request, response) => {
+  return response.json([]);
+});
+
 // Cria primeira rota
 app.get('/ads', (request, response) => {
   return response.send([
