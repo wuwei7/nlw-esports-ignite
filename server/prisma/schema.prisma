@@ -8,14 +8,14 @@ datasource db {
 }
 
 model Game {
-  id        String @id // Identifica "id" como chave primária.
+  id        String @id @default(uuid()) // Identifica "id" como chave primária.
   title     String
   bannerUrl String
   ads       Ad[]
 }
 
 model Ad {
-  id              String   @id
+  id              String   @id @default(uuid()) // Gera automaticamente uma id.
   gameId          String
   name            String
   yearsPlaying    Int
