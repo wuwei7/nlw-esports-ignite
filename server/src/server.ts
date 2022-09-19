@@ -8,19 +8,9 @@ const app = express()
 
 app.use(express.json())
 
-// Permite que todos os frontends acessem o backend.
 app.use(cors())
 
-/*
-app.use(cors({
-  // Permite que esse endereço acesse o backend.
-  origin: 'http://www.example.com'
-}))
-*/
-
-const prisma = new PrismaClient({
-  log: ['query']
-}) // Faz a conexão com o BD.
+const prisma = new PrismaClient({})
 
 app.get('/games', async (request, response) => {
   const games = await prisma.game.findMany({
@@ -81,7 +71,7 @@ app.get('/games/:id/ads', async (request, response) => {
 
   return response.json(ads.map(ad => {
     return {
-      ...ad, //Spread operator
+      ...ad,
       weekDays: ad.weekDays.split(','),
       hourStart: convertMinutesToHourString(ad.hourStart),
       hourEnd: convertMinutesToHourString(ad.hourEnd),
