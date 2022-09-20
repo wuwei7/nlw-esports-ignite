@@ -1,5 +1,5 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import { View, TouchableOpacity, Image } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { GameParams } from "../../@types/navigation";
@@ -11,14 +11,19 @@ import { THEME } from "../../theme";
 
 export function Game() {
 
+  const navigation = useNavigation();
   const route = useRoute();
   const game = route.params as GameParams;
+
+  function handleGoBack() {
+    navigation.goBack();
+  }
 
   return (
     <Background>
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleGoBack}>
           <Entypo 
             name="chevron-thin-left"
             color={THEME.COLORS.CAPTION_300}
@@ -34,6 +39,12 @@ export function Game() {
         <View style={styles.right} />
 
       </View>
+
+      <Image 
+        source={{uri: game.bannerUrl}}
+        style={styles.cover}
+        resizeMode="cover"
+      />
 
       <Heading 
         title={game.title}
