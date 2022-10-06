@@ -6,7 +6,6 @@
  - React
  - React Native
  - TypeScript
- - JavaScript
  - Tailwind CSS
  - Radix UI
  - Prisma
